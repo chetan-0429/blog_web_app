@@ -2,18 +2,6 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios';
 import { getUrl } from '../action';
 
-// export const login = createAsyncThunk(async({username,password})=>{
-//         console.log('login called username: ',username,password)
-//         try{
-//             let url = getUrl('/users/login');
-//             const res = await axios.post(url,{username,password,name:username});
-//             console.log('logged in ', res.data);
-//            return res.data;
-//         }catch(err){
-    //             console.log('error in login',err);
-    //             return err.response;
-    //         }
-    // })
     export const login = createAsyncThunk(
         'auth/loginUser',
         async ({ username, password }, { rejectWithValue }) => {
@@ -41,10 +29,17 @@ import { getUrl } from '../action';
     }
   );
 
+let token = localStorage.getItem('token') || null;
+let user = null;
+console.log('local: ',localStorage.getItem('user'))
+ user = token ? localStorage.getItem('user') : null;
+
+
+
 let initialState={
-    token :localStorage.getItem('token'),
-    isAuthenticated: false,
-    user:null,
+    token,
+    isAuthenticated: !!localStorage.getItem('token'),
+    user,
     error:null,
     loading:false
 };
@@ -66,6 +61,7 @@ export const authSlice = createSlice({
             state.error = null,
             state.user = null,
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
         }
     },
     extraReducers:(builder)=>{
@@ -81,7 +77,8 @@ export const authSlice = createSlice({
             state.loading = false;
             state.error = null;
             localStorage.setItem('token', action.payload.token);
-            // localStorage.setItem('user', action.payload.user);
+            console.log('action: ',action.payload.user)
+            localStorage.setItem('user', action.payload.user.username);
         })
         .addCase(login.rejected,(state,action)=>{
             state.loading = false;

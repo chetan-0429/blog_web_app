@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
-const fs = express('fs');
-const path = express('path');
+const fs = require('fs');
+const path = require('path');
 const cors = require('cors');
 app.use(cors());
 const dbConnect = require('./database');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files
+
 
 const dotenv = require('dotenv');
 dotenv.config();

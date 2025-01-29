@@ -9,6 +9,7 @@ function Home() {
   async function  fetchBlogs(){
     try{
       const res = await axios.get(getUrl('/blogs'));
+      console.log('response is : ',res)
       if(res.data.success){
         setBlogs(res.data.blogs);
       }

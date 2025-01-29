@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 function createToken(user){
-  const token =  jwt.sign(user, process.env.TOKEN_SECRET, {expiresIn:'2h'})
+  const token =  jwt.sign(user, process.env.TOKEN_SECRET, {expiresIn:'8h'})
   return token;
 }
 

@@ -2,13 +2,19 @@ import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 
+
 function Header() {
   const auth = useSelector(state => state.auth);
  console.log(auth)
   return (
     <>
     <div className='flex justify-between'>
-      <div>blog's</div>
+    <Link to={'/'}>
+  <div className="bg-yellow-300 text-gray-800 text-lg font-semibold px-4 py-2 rounded-md shadow-md hover:bg-yellow-400 transition duration-300">
+    Blogs
+  </div>
+</Link>
+
       <div>Welcome!</div>
       <div className='flex gap-4'>
       {
@@ -17,6 +23,12 @@ function Header() {
                             </Link> : <Link to={'/login'}>
                             <div>Login</div>
                             </Link>
+        }
+        {
+          auth.isAuthenticated ? <Link to= {'/postblog'}>Add Blog</Link> : <></>
+        }  
+        {
+          auth.isAuthenticated ? <Link to= {'/my-blog'}>My Blog</Link> : <></>
         }  
     
          <div className='flex'>

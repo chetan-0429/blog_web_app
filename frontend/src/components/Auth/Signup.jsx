@@ -1,27 +1,21 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import { getUrl } from '../../action';
+import { login } from '../../slices/authSlice';
+import { useDispatch,useSelector } from 'react-redux'
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
     const [name,setName] = useState('');
+    const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const navigate = useNavigate();
 
-    // async function handleClick(){
-    //     const data = {name,username,password};
-    //     try{
-    //       let res = await fetch('api/users/signup',{
-    //         method:"POST",
-    //         headers:{"content-type":"application/json"},
-    //         body:JSON.strignify(data)
-    //       })
-    //        res = await res.json();
-    //        console.log(res);
-    //     }catch(err){
-    //       console.log('error in creating',err);
-    //     }
-    // }
     async function handleClick(){
         const data = {name,username,password};
         try{
@@ -30,7 +24,17 @@ function Signup() {
            console.log(res.data);
            if(res.data.success){
             let token = res.data.token;
-            console.log('cookies set');
+            dispatch(login({ username, password }))
+            .then(() => {
+                toast.success('Login successful!');
+                navigate('/');
+            })
+            .catch(() => {
+                toast.error('Login failed. Please check your credentials.');
+            });
+        }
+        else{
+              toast.error('Signup failed, User already exist with this username.');
         }
         }catch(err){
           console.log('error in creating',err);
@@ -81,7 +85,15 @@ function Signup() {
         className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
         Submit
       </button>
+
+      <p className="mt-4 text-center text-sm text-gray-600">
+        Already have an account?{' '}
+        <a href="/login" className="text-blue-500 hover:text-blue-600">
+          Log In
+        </a>
+      </p>
     </div>
+     <ToastContainer />
   </div>
   )
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, useLocation, useNavigate,useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useState ,useEffect} from 'react'
+import { getUrl } from '../../action';
 
 function Blogsingle() {
   const {id} = useParams()
@@ -10,7 +11,8 @@ function Blogsingle() {
 
     async function fetchBlog(){
         try{
-            const res = await axios.get(`/api/blog/${id}`);
+            const res = await axios.get(getUrl(`/blog/${id}`));
+            console.log('response si: ',res)
             if(res.data.success){
                    setBlog(res.data.blog);
                 console.log('hkfke',res.data.blog)
@@ -34,7 +36,7 @@ function Blogsingle() {
               <img
                 src={blog.images}
                 alt={blog.name}
-                className="w-full md:w-2/3 rounded-lg mb-4 md:mb-0 md:mr-4"
+                className="w-2/3 md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-4"
                 />
               <p className="text-gray-700 flex-1">{blog.description}</p>
             </div>

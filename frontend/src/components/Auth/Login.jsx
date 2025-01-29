@@ -5,6 +5,8 @@ import Cookies from 'js-cookie';
 import { login } from '../../slices/authSlice';
 import { useDispatch,useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   console.log('login')
@@ -22,7 +24,20 @@ function Login() {
      function handleClick(e){
       e.preventDefault();
         console.log('clicked: ')
-        dispatch(login({username,password}));
+        dispatch(login({ username, password }))
+        .then((response) => {
+          console.log('response from login: ', response)
+          if (response.payload && response.payload.token) { 
+              navigate("/");
+            } else {
+              console.log('not login')
+                toast.error('Login failed. Please check your credentials.');
+            }
+        })
+        .catch((error) => {
+          console.log('error in ',error)
+            toast.error(error.message || 'Login failed. Please check your credentials.');
+        });
         console.log('clicked: checking for is auth',auth.isAuthenticated)
     }
     
@@ -59,7 +74,14 @@ function Login() {
         className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">
         Submit
       </button>
+      <p className="mt-4 text-center text-sm text-gray-600">
+                    Dont't have an account?{' '}
+                    <a href="/signup" className="text-blue-500 hover:text-blue-600">
+                        SignUp
+                    </a>
+                </p>
     </div>
+    <ToastContainer />
   </div>
   )
 }

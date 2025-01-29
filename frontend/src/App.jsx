@@ -19,40 +19,45 @@ import Profile from './components/Users/Profile'
 import Logout from './components/Auth/Logout'
 import MyComponent from './components/Mycomponent'
 import PostBlog from './components/Users/PostBlog'
+import MyBlog from './components/Users/MyBlog'
+import Edit from './components/Users/Edit'
+
 function App() {
   const auth = useSelector(state => state.auth)
+  const { isAuthenticated,user } = useSelector((state) => state.auth);
   console.log('auth: ',auth)
 
   useEffect(() => {
     checkExpiry();
   }, []); 
   
-function checkProtected(Component){
-  if(!auth.isAuthenticated){
-    return <Navigate to={'/login'}/>
+
+  function ProtectedRoute({ element }) {
+    return isAuthenticated ? element : <Navigate to="/login" />;
   }
-  else return <Component/>;
-}
+
   return (
-    <>
+  
     <BrowserRouter>
               <Routes>
                     <Route path='/' element={<Layout/>}>
                     <Route index element={<Home/>}/>
                     <Route path='/my' element={<MyComponent/>}/>
-                    <Route path='blog/:id' element={<Blogsingle/>}/>
-                    <Route path='user/:id' element={<Users/>}/>
-                    <Route path='signup' element={<Signup/>}/>
-                    <Route path='login' element={<Login/>}/>
+                    <Route path='/blog/:id' element={<Blogsingle/>}/>
+                    <Route path='/user/:id' element={<Users/>}/>
+                    <Route path='/signup' element={<Signup/>}/>
+                    <Route path='/login' element={<Login/>}/>
                     {/* protected Routes */}
-                    <Route path='profile' element={checkProtected(Profile)}/>
-                    <Route path='logout' element={checkProtected(Logout)}/>
-                    <Route path='postBlog' element={checkProtected(PostBlog)}/>
+                    <Route path="/profile" element={ < ProtectedRoute element={< Profile/>} /> } />
+                    <Route path='/logout' element={ < ProtectedRoute element={< Logout/>} /> }/>
+                    {/* <Route path='/logout' element={ProtectedRoute(Logout)}/> */}
+                    <Route path='/postBlog' element={ < ProtectedRoute element={< PostBlog/>} /> } />
+                    <Route path='/my-blog' element={ < ProtectedRoute element={< MyBlog/>} /> }/>
+                    <Route path='/edit/:id' element={ < ProtectedRoute element={< Edit/>} /> }/>
                     </Route>
               </Routes>
       </BrowserRouter>
 
-    </>
   )
 }
 
