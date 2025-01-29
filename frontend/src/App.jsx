@@ -17,7 +17,6 @@ import { useSelector,useDispatch } from 'react-redux'
 import checkExpiry from './components/utils/checkToken'
 import Profile from './components/Users/Profile'
 import Logout from './components/Auth/Logout'
-import MyComponent from './components/Mycomponent'
 import PostBlog from './components/Users/PostBlog'
 import MyBlog from './components/Users/MyBlog'
 import Edit from './components/Users/Edit'
@@ -42,7 +41,6 @@ function App() {
               <Routes>
                     <Route path='/' element={<Layout/>}>
                     <Route index element={<Home/>}/>
-                    <Route path='/my' element={<MyComponent/>}/>
                     <Route path='/blog/:id' element={<Blogsingle/>}/>
                     <Route path='/user/:id' element={<Users/>}/>
                     <Route path='/signup' element={<Signup/>}/>

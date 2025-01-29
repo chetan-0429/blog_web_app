@@ -29,8 +29,7 @@ async function handleClick(e){
        </div>
        <div>
       Description  <textarea name="" id="" placeholder='blog description' onChange={(e)=>{setDescription(e.target.value)}}></textarea>
-      {/* Description   type="text" name="" id="" placeholder='blog description' onChange={(e)=>{setDescription(e.value)}}/> */}
-       </div>
+        </div>
        <div>
        Images <input type="text" name="" id="" placeholder='images' onChange={(e)=>{setImages(e.target.value)}}/>
        </div>

@@ -13,12 +13,12 @@ import { getUrl } from '../action';
             'Content-Type': 'application/json',
           },
         });
-        console.log('resp: ',response)
-        console.log('resp data: ',response.data)
-        // Assuming response.data contains { token: '...', user: {...} }
+        // console.log('resp: ',response)
+        // console.log('resp data: ',response.data)
+   
         return response.data;
       } catch (error) {
-        // Handle errors appropriately
+        
         console.log('error ',error)
         if (error.response && error.response.data.message) {
           return rejectWithValue(error.response.data.message);

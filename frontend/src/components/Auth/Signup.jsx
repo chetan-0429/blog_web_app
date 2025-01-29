@@ -57,7 +57,7 @@ function Signup() {
         />
       </div>
 
-      {/* Username Field */}
+
       <div className="mb-4 flex items-center space-x-4">
         <label className="w-1/4 text-sm font-medium text-gray-700">Username</label>
         <input 
@@ -68,7 +68,7 @@ function Signup() {
         />
       </div>
 
-      {/* Password Field */}
+
       <div className="mb-6 flex items-center space-x-4">
         <label className="w-1/4 text-sm font-medium text-gray-700">Password</label>
         <input 
@@ -79,7 +79,7 @@ function Signup() {
         />
       </div>
 
-      {/* Submit Button */}
+
       <button 
         onClick={handleClick} 
         className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-200">

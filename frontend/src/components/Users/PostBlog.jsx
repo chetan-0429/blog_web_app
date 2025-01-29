@@ -8,20 +8,19 @@ function PostBlog() {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState(null); // For storing the selected file
+    const [image, setImage] = useState(null); 
 
-    // Handle the form submission
     async function handleClick(e) {
         e.preventDefault();
 
-        const url = getUrl('/add'); // Backend endpoint
-        const formData = new FormData(); // FormData object for file uploads
+        const url = getUrl('/add'); 
+        const formData = new FormData(); 
 
-        // Append text fields to formData
+       
         formData.append('name', name);
         formData.append('description', description);
 
-        // Append file field if an image is selected
+      
         if (image) {
             formData.append('image', image);
         }
@@ -29,8 +28,8 @@ function PostBlog() {
         try {
             const res = await axios.post(url, formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data', // Required for file uploads
-                    Authorization: `Bearer ${auth.token}`, // Add token for authentication
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${auth.token}`, 
                 },
             });
             console.log('Blog created successfully:', res.data);
@@ -62,7 +61,7 @@ function PostBlog() {
                 <label>Image</label>
                 <input
                     type="file"
-                    onChange={(e) => setImage(e.target.files[0])} // Capture the selected file
+                    onChange={(e) => setImage(e.target.files[0])} 
                 />
             </div>
             <button onClick={handleClick}>Submit</button>

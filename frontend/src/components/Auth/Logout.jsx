@@ -28,20 +28,19 @@ function Logout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Get the authentication state from Redux
   const auth = useSelector(state => state.auth);
 
-  // Handle logout logic
+
   const handleClick = () => {
     console.log('dispatched Logout');
     dispatch(logout());
     console.log('Logout done');
   };
 
-  // Redirect if the user is logged out
+
   useEffect(() => {
     if (!auth.isAuthenticated) {
-      navigate('/login'); // Or navigate to home if that's where you want to go
+      navigate('/login'); 
     }
   }, [auth.isAuthenticated, navigate]);
 

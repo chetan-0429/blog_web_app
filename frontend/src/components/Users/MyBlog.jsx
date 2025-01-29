@@ -10,9 +10,9 @@ function MyBlog() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch user-specific blogs from the backend
+    
     async function fetchBlogs() {
-      const url = getUrl("/user/blogs"); // Backend endpoint for fetching user's blogs
+      const url = getUrl("/user/blogs");
       try {
         const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${auth.token}` },
@@ -39,7 +39,7 @@ function MyBlog() {
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit/${id}`); // Redirect to the edit blog page
+    navigate(`/edit/${id}`);
   };
 
   console.log("blog::::::",blogs)

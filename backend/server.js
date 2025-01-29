@@ -7,7 +7,7 @@ app.use(cors());
 const dbConnect = require('./database');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 const dotenv = require('dotenv');

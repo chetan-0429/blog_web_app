@@ -205,11 +205,11 @@ function Edit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare the data to send as JSON
+
     const updatedBlogData = {
       name,
       description,
-      image, // This will either be a base64 string or null if no new image is provided
+      image, 
     };
 
     try {
@@ -224,7 +224,7 @@ function Edit() {
       console.log('API Response: ', data);
       if (data.success) {
         alert('Blog updated successfully');
-        navigate(`/blog/${id}`); // Redirect to the blog page
+        navigate(`/blog/${id}`); 
       } else {
         console.error('Failed to update blog');
       }

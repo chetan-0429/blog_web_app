@@ -23,11 +23,10 @@ function Home() {
   },[])
 
 
-
   return (
     <>
   <div className="container mx-auto p-4">
-    <h2 className="text-3xl font-bold mb-6">Blog Posts</h2>
+    <h2 className="text-3xl font-bold mb-6"></h2>
     {console.log('len', blogs.length)}
     {blogs.length === 0 ? (
       <p className="text-center text-gray-500">No blogs available.</p>
